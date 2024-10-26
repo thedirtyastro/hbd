@@ -55,7 +55,7 @@ export default function Home() {
 
   return (
     <div
-      className={`poppins w-screen p-4 h-screen flex flex-col items-center justify-center relative   text-white ${
+      className={`poppins w-screen p-4 h-svh flex flex-col items-center justify-center relative   text-white ${
         isDarkTheme
           ? "bg-background bg-pattern bg-no-repeat bg-cover"
           : "bg-patternd bg-no-repeat bg-cover"
