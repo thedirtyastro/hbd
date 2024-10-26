@@ -13,8 +13,8 @@ const config: Config = {
         foreground: "var(--foreground)", // Now this is properly separated
       },
       backgroundImage: {
-        pattern: "url('/assets/gradient.svg')",
-        patternd : "url('/assets/background.png')",
+        pattern: "url('../../public/assets/gradient.svg')",
+        patternd : "url('../../public/assets/background.png')",
       },
       boxShadow: {
         '3xl': '0 35px 35px rgba(0, 0, 0, 0.25)',
