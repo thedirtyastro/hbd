@@ -5,6 +5,7 @@ import React, { useRef } from "react";
 import Music from "../../public/assets/music.svg";
 import Button from "./Button";
 
+
 // Define the props type for Card component
 interface CardProps {
   isVisible: boolean;
@@ -39,7 +40,8 @@ const Card: React.FC<CardProps> = ({ isVisible, setIsVisible }) => {
           </div>
         </div>
       )}
-      <audio ref={audioRef} src="../../public/audio/music.mp3" />
+
+      <audio ref={audioRef} src={"./assets/music.mp3"} />
     </>
   );
 };
