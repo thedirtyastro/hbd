@@ -39,7 +39,7 @@ const Card: React.FC<CardProps> = ({ isVisible, setIsVisible }) => {
           </div>
         </div>
       )}
-      <audio ref={audioRef} src="/audio/music.mp3" />
+      <audio ref={audioRef} src="../../public/audio/music.mp3" />
     </>
   );
 };
