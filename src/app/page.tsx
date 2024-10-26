@@ -42,15 +42,16 @@ export default function Home() {
 
   return (
     <div
-    className={`poppins w-screen p-4 h-screen flex flex-col items-center justify-center relative   text-white ${
-      isDarkTheme ? 'bg-background bg-pattern bg-no-repeat bg-cover' : 'bg-patternd bg-no-repeat bg-cover'
-    }`} 
-    >
+      className={`poppins w-screen p-4 h-screen flex flex-col items-center justify-center relative   text-white ${
+        isDarkTheme
+          ? "bg-background bg-pattern bg-no-repeat bg-cover"
+          : "bg-patternd bg-no-repeat bg-cover"
+      }`}>
       {/* Cloud image */}
       {/* Cloud image */}
       <div className="fixed top-7 -right-10 lg:right-10">
         <Image
-          src={isDarkTheme ? Cloud_s : Cloud_dark }
+          src={isDarkTheme ? Cloud_s : Cloud_dark}
           alt="Clouds"
           height={250}
           width={250}
@@ -59,10 +60,10 @@ export default function Home() {
       </div>
       <button
         onClick={toggleTheme}
-        className="absolute z-[1] bottom-10 right-10 bg-white/10 text-white border border-white p-2 rounded-md shadow-lg transition cursor-pointer"
-      >
+        className="absolute z-[1] bottom-10 right-10 bg-white/10 text-white border border-white p-2 rounded-md shadow-lg transition cursor-pointer">
         Change theme
       </button>
+
       {/* Pass down isCardVisible and setIsCardVisible to control Card visibility */}
       <Card isVisible={isCardVisible} setIsVisible={setIsCardVisible} />
 
@@ -93,7 +94,7 @@ export default function Home() {
           )}
           {activeDiv === 2 && (
             <div className="two flex flex-col justify-center">
-              <span className="text-xl">it's Your</span>
+              <span className="text-xl">it&apos;s Your</span>
               <motion.span
                 className="text-5xl font-semibold"
                 initial={{ scale: 0.5, opacity: 0 }} // Start from a smaller scale with zero opacity
@@ -134,7 +135,7 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }} // Fade in and move to original position
                 transition={{ duration: 2, ease: "easeOut" }} // Adjust duration and easing as needed
               >
-                That's what I was going to do.
+                That&apos;s what I was going to do.
               </motion.div>
             </div>
           )}
@@ -235,13 +236,30 @@ export default function Home() {
                     height={150}
                   />
                 </motion.div>
-
-                <div className="wish mt-4 text-center text-4xl">
+                <div className="wish mt-4 text-center text-2xl">
                   <motion.h3
-                    className="wish-hbd text-3xl font-bold text-red-500"
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ duration: 1, delay: 0.5, ease: "easeInOut" }}>
+                    className="wish-hbd text-5xl font-bold py-1"
+                    initial={{ scale:1, opacity:0 }}
+                    style={{ fontWeight: "bold" }}
+                    animate={{
+                     scale:1,
+                     opacity:1,
+                      color: [
+                        "#FF0000", // red
+                        "#FF7F00", // orange
+                        "#FFFF00", // yellow
+                        "#00FF00", // green
+                        "#0000FF", // blue
+                        "#4B0082", // indigo
+                        "#8B00FF", // violet
+                      ],
+                    }}
+                    transition={{
+                      duration: 5, // duration for the full color cycle
+                      repeat: Infinity, // loop indefinitely
+                      ease: "linear",
+                      delay: 2,
+                    }}>
                     Happy Birthday!
                   </motion.h3>
                   <motion.h5
@@ -249,12 +267,14 @@ export default function Home() {
                     className="mt-2 text-xl"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ duration: 1, delay: 1, ease: "easeInOut" }}>
+                    transition={{ duration: 1, delay: 5, ease: "easeInOut" }}>
                     I hope all your birthday wishes come true! Wishing nothing
                     but the absolute best for my best friend.
                   </motion.h5>
                 </div>
               </div>
+              <button onClick={() => window.location.reload() } className="absolute z-[1] bottom-5 left-10 bg-white/10 text-white border border-white p-2 rounded-md shadow-lg transition cursor-pointer">Rewatch</button>
+
             </div>
           )}
         </>
