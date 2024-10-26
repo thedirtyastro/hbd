@@ -4,7 +4,7 @@ import Card from "@/components/Card";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Cloud_s from "../../public/assets/cloud-s.svg";
-import Cloud_dark from "../../public/assets/Clouds.png";
+import Cloud_dark from "../../public/assets/Clouds_d.svg";
 
 import Profile from "../../public/assets/profile.jpg";
 
@@ -14,11 +14,24 @@ export default function Home() {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const [activeDiv, setActiveDiv] = useState(1); // Tracks the currently active div
   const [isCardVisible, setIsCardVisible] = useState(true);
+
+  const [startTyping, setStartTyping] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setStartTyping(true);
+    }, 10000); // 3 seconds delay
+
+    return () => clearTimeout(timer); // Clean up the timer on component unmount
+  }, []);
+
   const fullText =
     "Happy Birthday, Narmuuu! 🎉 Wishing you a day filled with laughter, love, and all the...";
 
   // Timing for each div (in milliseconds)
-  const divTimings = [5000, 4000, 9000, 4000, 4000, 6000, 5000, 3000, 8000];
+  const divTimings = [
+    5000, 4000, 9000, 4000, 4000, 6000, 5000, 3000, 15000, 5000,
+  ];
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
@@ -49,15 +62,17 @@ export default function Home() {
       }`}>
       {/* Cloud image */}
       {/* Cloud image */}
-      <div className="fixed top-7 -right-10 lg:right-10">
-        <Image
-          src={isDarkTheme ? Cloud_s : Cloud_dark}
-          alt="Clouds"
-          height={250}
-          width={250}
-          className=""
-        />
-      </div>
+      {isCardVisible && (
+        <div className="fixed top-7 -right-10 lg:right-10">
+          <Image
+            src={isDarkTheme ? Cloud_s : Cloud_dark}
+            alt="Clouds"
+            height={250}
+            width={250}
+            className=""
+          />
+        </div>
+      )}
       <button
         onClick={toggleTheme}
         className="absolute z-[1] bottom-10 right-10 bg-white/10 text-white border border-white p-2 rounded-md shadow-lg transition cursor-pointer">
@@ -112,7 +127,7 @@ export default function Home() {
           {activeDiv === 3 && (
             <div className="three flex flex-col gap-3 justify-end text-xl">
               <div className="three flex flex-col gap-3 justify-end text-lg">
-                <div className="text-box  border border-white bg-white/10 p-6 rounded-lg w-[400px] h-[250px] ">
+                <div className="text-box  border border-white bg-white/10 p-6 rounded-lg w-[375px] h-[250px] ">
                   <TypewriterComponent
                     options={{
                       strings: [fullText],
@@ -123,7 +138,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="border border-white bg-blue-400 py-2 px-4 w-fit rounded-full">
+              <div className="border border-white left-2 bg-blue-400 py-2 px-4 w-fit rounded-full">
                 Send
               </div>
             </div>
@@ -133,7 +148,7 @@ export default function Home() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }} // Start with opacity at 0 and a small downward offset
                 animate={{ opacity: 1, y: 0 }} // Fade in and move to original position
-                transition={{ duration: 2, ease: "easeOut" }} // Adjust duration and easing as needed
+                transition={{ duration: 2, ease: "easeOut", delay: 1 }} // Adjust duration and easing as needed
               >
                 That&apos;s what I was going to do.
               </motion.div>
@@ -182,7 +197,7 @@ export default function Home() {
             <div className="text-2xl flex flex-col gap-2">
               <span>Because,</span>
 
-              <motion.span className="text-5xl font-semibold flex gap-1">
+              <motion.span className="text-5xl font-semibold pr-1">
                 You are&nbsp;
                 <motion.span
                   style={{ display: "inline-block" }}
@@ -223,58 +238,46 @@ export default function Home() {
           {activeDiv === 9 && (
             <div className="relative h-screen w-screen overflow-hidden flex justify-center items-center">
               {/* Main content */}
-              <div className="nine flex flex-col items-center">
-                <motion.div
-                  initial={{ x: "-100vw", opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ duration: 1, ease: "easeInOut" }}>
-                  <Image
-                    src={Profile}
-                    alt="profile"
-                    className="rounded-full"
-                    width={150}
-                    height={150}
-                  />
-                </motion.div>
-                <div className="wish mt-4 text-center text-2xl">
-                  <motion.h3
-                    className="wish-hbd text-5xl font-bold py-1"
-                    initial={{ scale:1, opacity:0 }}
-                    style={{ fontWeight: "bold" }}
-                    animate={{
-                     scale:1,
-                     opacity:1,
-                      color: [
-                        "#FF0000", // red
-                        "#FF7F00", // orange
-                        "#FFFF00", // yellow
-                        "#00FF00", // green
-                        "#0000FF", // blue
-                        "#4B0082", // indigo
-                        "#8B00FF", // violet
+              <div className="nine flex flex-col gap-2 items-center">
+                <Image
+                  src={Profile}
+                  alt="profile"
+                  className="rounded-full"
+                  width={150}
+                  height={150}
+                />
+                <div className="wish  text-center text-lg">
+                  <span className="text-3xl mb-2"> Happy Birthday! </span>
+                  <TypewriterComponent
+                    options={{
+                      strings: [
+                        "I hope all your birthday wishes come true! Wishing nothing but the absolute best for my best friend.",
                       ],
+                      autoStart: startTyping ? true : false,
+                      delay: "natural", // Slower typing speed
+                      deleteSpeed: Infinity, // Prevents erasing
+                      loop: false,
                     }}
-                    transition={{
-                      duration: 5, // duration for the full color cycle
-                      repeat: Infinity, // loop indefinitely
-                      ease: "linear",
-                      delay: 2,
-                    }}>
-                    Happy Birthday!
-                  </motion.h3>
-                  <motion.h5
-                    id="wishText"
-                    className="mt-2 text-xl"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1, delay: 5, ease: "easeInOut" }}>
-                    I hope all your birthday wishes come true! Wishing nothing
-                    but the absolute best for my best friend.
-                  </motion.h5>
+                  />
                 </div>
               </div>
-              <button onClick={() => window.location.reload() } className="absolute z-[1] bottom-5 left-10 bg-white/10 text-white border border-white p-2 rounded-md shadow-lg transition cursor-pointer">Rewatch</button>
-
+            </div>
+          )}
+          {activeDiv === 10 && (
+            <div className="ten text-2xl text-center ">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }} // Start with opacity at 0 and slight offset below
+                animate={{ opacity: 1, y: 0 }} // Fade in and slide up to position
+                transition={{ duration: 0.8, ease: "easeOut", delay: 1 }} // Adjust duration and add delay if needed
+              >
+                <p className="mb-2">Okay, now come back and tell me if you liked it.</p>
+                <p className="mb-2">Or click Replay, if you want to watch it again.</p>
+                <button
+                  onClick={() => window.location.reload()}
+                  className=" bg-white/10 text-white border border-white p-2 rounded-md shadow-lg transition cursor-pointer">
+                  Rewatch
+                </button>
+              </motion.div>
             </div>
           )}
         </>
